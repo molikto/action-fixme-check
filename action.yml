@@ -8,7 +8,8 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.case-sensitive }} ${{ inputs.require-colon }}
+    - ${{ inputs.case-sensitive }}
+    - ${{ inputs.require-colon }}
 inputs:
   terms:
     description: "The pipe-delimited searchable terms to pass as a regex group to `git grep`."
