@@ -8,7 +8,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.case-sensitive }}
+    - ${{ inputs.case-sensitive }} ${{ inputs.require-colon }}
 inputs:
   terms:
     description: "The pipe-delimited searchable terms to pass as a regex group to `git grep`."
@@ -16,5 +16,9 @@ inputs:
     default: "FIXME"
   case-sensitive:
     description: "Whether the searchable terms passed to `git grep` should be case-sensitive or not."
+    required: false
+    default: true
+  require-colon:
+    description: "Whether the terms must be followed by a colon."
     required: false
     default: true

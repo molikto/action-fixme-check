@@ -10,6 +10,7 @@ echo "::add-matcher::git-grep-problem-matcher.json"
 
 
 case_sensitive="${1}"
+require_colon="${2}"
 
 if [ ${case_sensitive} = false ]; then
 	case_sensitive="--ignore-case"
@@ -19,7 +20,12 @@ fi
 
 
 tag=${INPUT_TERMS:=FIXME}
-result=$(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "(${tag})+(:)" :^.github)
+
+regex = "(${tag})+"
+if [ ${require_colon} = true ]; then
+	regex = "${regex}(:)"
+fi
+result = $(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "${regex}" :^.github)
 
 echo "${result}"
 
