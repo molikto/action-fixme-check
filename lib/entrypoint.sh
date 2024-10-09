@@ -21,11 +21,13 @@ fi
 
 tag=${INPUT_TERMS:=FIXME}
 
-regex = "(${tag})+"
+regex="(${tag})+"
+
 if [ ${require_colon} = true ]; then
-	regex = "${regex}(:)"
+	regex="${regex}(:)"
 fi
-result = $(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "${regex}" :^.github)
+
+result=$(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "${regex}" :^.github)
 
 echo "${result}"
 
